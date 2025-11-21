@@ -165,8 +165,4 @@ eci_training_app/
 - Verify the app starts correctly: `uv run streamlit run Home.py`
 - Check for any error messages in the terminal
 
-## License
-
-
-## Contact
 
