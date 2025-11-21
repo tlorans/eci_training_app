@@ -1,0 +1,596 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+ \usepackage{amsmath}
+\title{ECI Internal Training \\ 
+First Session}
+% \author{Thomas Lorans}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{itemize}
+    \item Asset pricing = present value of future cash flows.
+    \item Two building blocks:
+    \begin{itemize}
+        \item Time: discounting, intertemporal substitution.
+        \item Risk: states of the world, contingent claims.
+    \end{itemize}
+    \item Use expected utility: $E[u(c)]$.
+\end{itemize}
+
+
+\section{Microfoundations of Asset Pricing Theory}
+
+
+\subsection{Few Recap on Optimization}
+
+%=========================================================
+\paragraph{Unconstrained optimization: $\max_x F(x)$, FOC $F'(x^*)=0$, SOC $F''(x^*)<0$.}
+\begin{itemize}
+    \item  Function:
+    \[
+        F(x) = -\frac{1}{2}(x-5)^2.
+    \]
+    \item First derivative:
+    \[
+        F'(x) = -(x-5).
+    \]
+    \item Solve FOC:
+    \[
+        F'(x^*) = 0 \quad\Rightarrow\quad x^* = 5.
+    \]
+    \item Second derivative:
+    \[
+        F''(x) = -1 < 0,
+    \]
+    so the SOC confirms a strict maximum at \(x=5\).
+\end{itemize}
+
+%=========================================================
+\paragraph{Concavity: $F''(x)<0$ for all $x$ $\Rightarrow$ FOC is necessary and sufficient.}
+\begin{itemize}
+    \item Function:
+    \[
+        F(x) = -\frac{1}{2}(x-5)^2.
+    \]
+    \item Second derivative:
+    \[
+        F''(x) = -1 < 0 \quad \forall x.
+    \]
+    \item Since $F$ is globally concave, *any* solution to $F'(x)=0$ is automatically the global maximizer.
+\end{itemize}
+
+%=========================================================
+\paragraph{Constrained problem: $\max_x F(x)$ s.t. $c \ge G(x)$.}
+\begin{itemize}
+    \item non-binding:
+    \[
+        \max_x -\frac{1}{2}(x-5)^2 \quad \text{s.t.}\quad 7 \ge x.
+    \]
+    \item Unconstrained optimum: $x^*=5$.
+    \item Check constraint: $7 > 5$ → constraint non-binding → optimal solution unchanged: $x^*=5$.
+\end{itemize}
+
+%=========================================================
+\paragraph{Lagrangian: $L(x,\lambda)=F(x)+\lambda(c-G(x))$.}
+\begin{itemize}
+    \item Lagrangian:
+    \[
+        L(x,\lambda)= -\frac{1}{2}(x-5)^2 + \lambda(7-x).
+    \]
+    \item First-order condition:
+    \[
+        \frac{\partial L}{\partial x}= -(x-5) - \lambda = 0.
+    \]
+    \item Complementary slackness:
+    \[
+        \lambda(7-x)=0.
+    \]
+    \item Non-binding case: $x=5$, $\lambda=0$ satisfies both.
+\end{itemize}
+
+%=========================================================
+\paragraph{KKT conditions.}
+\begin{itemize}
+    \item Maximization:
+    \[
+        \max_x -\frac{1}{2}(x-5)^2 \quad \text{s.t.}\quad 4 \ge x.
+    \]
+    \item Lagrangian:
+    \[
+        L(x,\lambda)= -\frac{1}{2}(x-5)^2 + \lambda(4-x).
+    \]
+    \item First-order condition:
+    \[
+        -(x-5) - \lambda = 0.
+    \]
+    \item Complementary slackness:
+    \[
+        \lambda(4-x)=0.
+    \]
+    \item Since unconstrained optimum $x=5$ is infeasible, constraint must bind: $x^*=4$.
+    \item Solve for $\lambda$:
+    \[
+        -(4-5) - \lambda = 0 
+        \quad\Rightarrow\quad 
+        1 - \lambda = 0 
+        \quad\Rightarrow\quad 
+        \lambda = 1.
+    \]
+    \item Final solution:
+    \[
+        x^*=4,\qquad \lambda^*=1.
+    \]
+\end{itemize}
+
+
+\subsection{The Time Dimension}
+
+%===================================================
+\paragraph{Utility: $u(c_0)+\beta u(c_1)$.}
+\begin{itemize}
+    \item As in the slides, reinterpret the two goods as:
+    \[
+        c_0 = \text{consumption today},\qquad
+        c_1 = \text{consumption next year}.
+    \]
+    \item Fisher’s two–period intertemporal utility:
+    \[
+        U = u(c_0) + \beta u(c_1),
+    \]
+    where $\beta$ is the discount factor (slide 68).
+    \item Concavity of $u$ implies a preference for smooth consumption (slide 69).
+\end{itemize}
+
+%===================================================
+\paragraph{Budget constraints.}
+\begin{itemize}
+    \item Today’s tradeoff (slide 71):
+    \[
+        Y_0 \ge c_0 + s,
+    \]
+    where $s$ is saving (or borrowing if $s<0$).
+    \item Next year’s constraint (slide 71):
+    \[
+        Y_1 + (1+r)s \ge c_1.
+    \]
+    \item Saving increases next year’s consumption; borrowing reduces it.
+\end{itemize}
+
+%===================================================
+\paragraph{Lifetime budget constraint.}
+\begin{itemize}
+    \item Divide next year’s constraint by $(1+r)$ (slide 72):
+    \[
+        \frac{Y_1}{1+r} + s \ge \frac{c_1}{1+r}.
+    \]
+    \item Combine with the first-period constraint $Y_0 \ge c_0 + s$:
+    \[
+        Y_0 + \frac{Y_1}{1+r}
+        \ge
+        c_0 + \frac{c_1}{1+r}.
+    \]
+    \item This is the *lifetime* budget constraint derived on slide 73:
+    the present value of consumption cannot exceed the present value of income.
+\end{itemize}
+
+%===================================================
+\paragraph{Intertemporal marginal rate of substitution.}
+\begin{itemize}
+    \item Lagrangian for the time-allocation problem (slide 77):
+    \[
+        L = u(c_0) + \beta u(c_1)
+        + \lambda\!\left(
+            Y_0 + \frac{Y_1}{1+r}
+            - c_0 - \frac{c_1}{1+r}
+        \right).
+    \]
+    \item First-order conditions (slide 78):
+    \[
+        u'(c_0) - \lambda = 0,\qquad
+        \beta u'(c_1) - \lambda\!\left(\frac{1}{1+r}\right)=0.
+    \]
+    \item Eliminate $\lambda$ using $\lambda = u'(c_0)$:
+    \[
+        \beta u'(c_1) = \frac{u'(c_0)}{1+r}.
+    \]
+    \item Rearrange to obtain the intertemporal MRS (slide 78):
+    \[
+        \frac{u'(c_0)}{\beta u'(c_1)} = 1+r.
+    \]
+    \item Interpretation:  
+    MRS (marginal willingness to give up $c_1$ for $c_0$)  
+    equals the relative price of consumption across periods.
+\end{itemize}
+\subsection{The Risk Dimension}
+
+%===================================================
+\paragraph{Setup: Utility under uncertainty.}
+\begin{itemize}
+    \item As in slides (86–91), income next year is state-dependent:
+    \[
+        Y_1^G \quad\text{(good state)},\qquad
+        Y_1^B \quad\text{(bad state)},\qquad
+        Y_1^G > Y_1^B.
+    \]
+    \item Probabilities:
+    \[
+        \pi = P(G),\qquad 1-\pi = P(B).
+    \]
+    \item Consumption choices:
+    \[
+        c_0,\quad c_1^G,\quad c_1^B.
+    \]
+    \item Expected utility (slide 91):
+    \[
+        U = u(c_0) + \beta\big[\pi u(c_1^G) + (1-\pi)u(c_1^B)\big].
+    \]
+    \item Concavity of \(u\) captures risk aversion and desire for smoothness across states (slide 94).
+\end{itemize}
+
+%===================================================
+\paragraph{Budget constraints and contingent claims.}
+\begin{itemize}
+    \item The consumer can buy contingent claims (slides 95–101):
+    \[
+        q_G: \text{ price of claim paying 1 in good state},\qquad
+        q_B: \text{ price of claim paying 1 in bad state}.
+    \]
+    \item Purchases:
+    \[
+        s_G,\, s_B \quad \text{(negative = shorting)}.
+    \]
+    \item Budget today (slide 101):
+    \[
+        Y_0 \ge c_0 + q_G s_G + q_B s_B.
+    \]
+    \item State-by-state constraints (slide 102):
+    \[
+        Y_1^G + s_G \ge c_1^G,\qquad
+        Y_1^B + s_B \ge c_1^B.
+    \]
+\end{itemize}
+
+%===================================================
+\paragraph{Deriving the lifetime budget constraint.}
+\begin{itemize}
+    \item Multiply the good-state constraint by \(q_G\) and the bad-state constraint by \(q_B\) (slide 103):
+    \[
+        q_G Y_1^G + q_G s_G \ge q_G c_1^G,
+    \]
+    \[
+        q_B Y_1^B + q_B s_B \ge q_B c_1^B.
+    \]
+    \item Add these and combine with today’s constraint:
+    \[
+        Y_0 + q_G Y_1^G + q_B Y_1^B
+        \ge
+        c_0 + q_G c_1^G + q_B c_1^B.
+    \]
+    \item This is the lifetime Arrow–Debreu budget constraint (slide 103).
+\end{itemize}
+
+%===================================================
+\paragraph{FOCs and marginal rates of substitution.}
+\begin{itemize}
+    \item Lagrangian (slide 105):
+    \[
+        L = u(c_0) + \beta\pi u(c_1^G) + \beta(1-\pi)u(c_1^B)
+        + \lambda\!\left(
+            Y_0 + q_G Y_1^G + q_B Y_1^B
+            - c_0 - q_G c_1^G - q_B c_1^B
+        \right).
+    \]
+    \item First-order conditions (slide 105):
+    \[
+        u'(c_0) - \lambda = 0,
+    \]
+    \[
+        \beta\pi u'(c_1^G) - \lambda q_G = 0,
+    \]
+    \[
+        \beta(1-\pi)u'(c_1^B) - \lambda q_B = 0.
+    \]
+    \item Eliminate \(\lambda\) to get the pricing relations (slide 106):
+    \[
+        \frac{u'(c_0)}{\beta \pi u'(c_1^G)} = \frac{1}{q_G},
+        \qquad
+        \frac{u'(c_0)}{\beta (1-\pi) u'(c_1^B)} = \frac{1}{q_B}.
+    \]
+    \item State-relative price condition (slide 106):
+    \[
+        \frac{\pi u'(c_1^G)}{(1-\pi)u'(c_1^B)}
+        = \frac{q_G}{q_B}.
+    \]
+\end{itemize}
+
+%===================================================
+\paragraph{Interpreting contingent claims as building blocks.}
+\begin{itemize}
+    \item A stock with dividends \((d_G, d_B)\) is equivalent to a bundle of contingent claims (slides 108–112):
+    \[
+        q_{\text{stock}} = q_G d_G + q_B d_B.
+    \]
+    \item A risk-free bond paying \(1\) in every state (slide 114):
+    \[
+        q_{\text{bond}} = q_G + q_B = \frac{1}{1+r}.
+    \]
+    \item So the risk-free rate is (slide 114):
+    \[
+        1+r = \frac{1}{q_G + q_B}.
+    \]
+\end{itemize}
+
+%===================================================
+\paragraph{Recovering contingent claim prices from traded assets.}
+\begin{itemize}
+    \item Using a stock (\(d_G, d_B\)) and a bond, we can solve for \(q_G\), \(q_B\) via replication (slides 117–122).
+    \item To replicate a good-state claim: solve
+    \[
+        s d_G + b = 1,\qquad s d_B + b = 0.
+    \]
+    \item Solution (slide 118):
+    \[
+        s = \frac{1}{d_G - d_B},\qquad
+        b = \frac{-d_B}{d_G - d_B}.
+    \]
+    \item Hence (slide 119):
+    \[
+        q_G = q_{\text{stock}}\,s + q_{\text{bond}}\,b.
+    \]
+    \item Similarly for the bad-state claim (slide 122):
+    \[
+        q_B = \frac{d_G q_{\text{bond}} - q_{\text{stock}}}{d_G - d_B}.
+    \]
+\end{itemize}
+
+\subsection{General Equilibrium}
+
+%===================================================
+\paragraph{Pareto optimality condition.}
+\begin{itemize}
+    \item In the Edgeworth box (slides 126–132), two consumers trade goods $a$ and $b$.
+    \item A feasible allocation is Pareto optimal when no reallocation can make one consumer better off without making the other worse off.
+    \item Geometrically: indifference curves are tangent (slide 131).
+    \item Mathematically (slide 132):
+    \[
+        MRS^1_{a,b} = MRS^2_{a,b}.
+    \]
+    \item This states that the two consumers’ marginal rates of substitution must coincide.
+\end{itemize}
+
+%===================================================
+\paragraph{Social planner conditions.}
+\begin{itemize}
+    \item Utilities from slides (133–135):
+    \[
+        U_1 = u(c_a^1) + \alpha u(c_b^1), \qquad
+        U_2 = v(c_a^2) + \beta v(c_b^2).
+    \]
+    \item Resource constraints:
+    \[
+        Y_a \ge c_a^1 + c_a^2,\qquad
+        Y_b \ge c_b^1 + c_b^2.
+    \]
+    \item Social planner maximizes weighted sum (slide 134):
+    \[
+        \theta U_1 + (1-\theta)U_2.
+    \]
+    \item Lagrangian (slide 135):
+    \[
+        L=\theta[u(c_a^1)+\alpha u(c_b^1)]
+        +(1-\theta)[v(c_a^2)+\beta v(c_b^2)]
+        +\lambda_a(Y_a - c_a^1 - c_a^2)
+        +\lambda_b(Y_b - c_b^1 - c_b^2).
+    \]
+    \item First-order conditions (slide 135):
+    \[
+        \theta u'(c_a^1) = \lambda_a,\qquad
+        \theta \alpha u'(c_b^1) = \lambda_b,
+    \]
+    \[
+        (1-\theta) v'(c_a^2) = \lambda_a,\qquad
+        (1-\theta)\beta v'(c_b^2) = \lambda_b.
+    \]
+    \item Divide each consumer’s $a$–equation by the $b$–equation (slide 136):
+    \[
+        \frac{u'(c_a^1)}{\alpha u'(c_b^1)}
+        =
+        \frac{v'(c_a^2)}{\beta v'(c_b^2)}.
+    \]
+    \item This is exactly the Pareto condition:
+    \[
+        MRS^1_{a,b} = MRS^2_{a,b}.
+    \]
+\end{itemize}
+
+%===================================================
+\paragraph{Competitive equilibrium condition.}
+\begin{itemize}
+    \item Consumers maximize utility subject to market prices (slides 138–142).
+    \item Consumer 1’s Lagrangian (slide 139):
+    \[
+        L_1 = u(c_a^1) + \alpha u(c_b^1) 
+        +\lambda_1\big(p_a Y_a^1 + p_b Y_b^1
+        - p_a c_a^1 - p_b c_b^1\big).
+    \]
+    \item FOCs:
+    \[
+        u'(c_a^1)=\lambda_1 p_a,\qquad
+        \alpha u'(c_b^1)=\lambda_1 p_b.
+    \]
+    \item Therefore (slide 139):
+    \[
+        \frac{u'(c_a^1)}{\alpha u'(c_b^1)}=\frac{p_a}{p_b}.
+    \]
+    \item Similarly for consumer 2 (slide 141):
+    \[
+        \frac{v'(c_a^2)}{\beta v'(c_b^2)}=\frac{p_a}{p_b}.
+    \]
+    \item Hence in any competitive equilibrium (slide 142):
+    \[
+        MRS^1_{a,b} = \frac{p_a}{p_b} = MRS^2_{a,b}.
+    \]
+\end{itemize}
+
+%===================================================
+\paragraph{Welfare theorems.}
+\begin{itemize}
+    \item Slide 145 formalizes the main results:
+    \begin{itemize}
+        \item \textbf{First Welfare Theorem:}  
+        Any competitive equilibrium allocation satisfies the PO condition:  
+        \[
+        CE \;\Rightarrow\; PO.
+        \]
+        \item \textbf{Second Welfare Theorem:}  
+        Any Pareto optimal allocation can be supported as a competitive equilibrium with appropriate prices:  
+        \[
+        PO \;\Rightarrow\; CE \;\text{for some prices}.
+        \]
+    \end{itemize}
+\end{itemize}
+
+\section{Overview of Asset Pricing Theory}
+
+%============================================================
+\subsection{Pricing Safe Cash Flows}
+
+\paragraph{Discount bond pricing.}
+\begin{itemize}
+    \item A $T$-year discount bond pays \$1 at maturity (slide 3).
+    \item If its price today is $P_T$, the gross return is:
+    \[
+        1+r_T = \left(\frac{1}{P_T}\right)^{1/T}.
+    \]
+    \item Therefore (slide 3):
+    \[
+        P_T = \frac{1}{(1+r_T)^T}.
+    \]
+    \item Interpretation: price = present discounted value of a certain future payment.
+\end{itemize}
+
+\paragraph{Coupon bond pricing.}
+\begin{itemize}
+    \item Coupon bond pays $C$ each year for $T$ years and face value $F$ at maturity (slide 5).
+    \item Decomposed as portfolio of discount bonds (slide 6).
+    \item No-arbitrage implies (slide 8):
+    \[
+        P_T^C
+        = \frac{C}{1+r_1}
+        + \frac{C}{(1+r_2)^2}
+        + \cdots
+        + \frac{C}{(1+r_T)^T}
+        + \frac{F}{(1+r_T)^T}.
+    \]
+    \item The yield to maturity $r$ solves (slide 9):
+    \[
+        P_T^C 
+        = \sum_{t=1}^T \frac{C}{(1+r)^t}+\frac{F}{(1+r)^T}.
+    \]
+\end{itemize}
+
+\paragraph{General stream of safe cash flows.}
+\begin{itemize}
+    \item For riskless cash flows $C_1,\dots,C_T$ (slide 11):
+    \[
+        P = \sum_{t=1}^T C_t P_t.
+    \]
+    \item Since $P_t = \frac{1}{(1+r_t)^t}$ (slide 12):
+    \[
+        P = \sum_{t=1}^T \frac{C_t}{(1+r_t)^t}.
+    \]
+\end{itemize}
+
+%============================================================
+\subsection{Pricing Risky Cash Flows}
+
+\paragraph{Expected value approach.}
+\begin{itemize}
+    \item Random payoff $\tilde{C}_t$ with possible outcomes $\{C_{t,i}\}$ and probabilities $\{\pi_i\}$ (slide 15):
+    \[
+        E(\tilde{C}_t)=\sum_i \pi_i C_{t,i}.
+    \]
+    \item Risk-adjusted discounting (slide 16):
+    \[
+        P_t^A = \frac{E(\tilde{C}_t)}{(1+r_t+\psi_t)^t},
+    \]
+    or equivalently
+    \[
+        P_t^A = \frac{E(\tilde{C}_t)-\Psi_t}{(1+r_t)^t}.
+    \]
+    \item CAPM, CCAPM, APT provide formulas for $\psi_t$ or $\Psi_t$ (slide 17).
+\end{itemize}
+
+\paragraph{Arrow–Debreu (contingent claim) pricing.}
+\begin{itemize}
+    \item Decompose payoff into state components (slide 18):
+    \[
+        \tilde{C}_t = (C_{t,1},\dots,C_{t,n}).
+    \]
+    \item With contingent claim prices $q_{t,i}$ (slide 19):
+    \[
+        P_t^A = \sum_{i=1}^n q_{t,i} C_{t,i}.
+    \]
+    \item Interpretation: the risky asset = portfolio of state-contingent discount bonds.
+\end{itemize}
+
+\paragraph{Martingale / risk-neutral pricing.}
+\begin{itemize}
+    \item “Distort” probabilities: replace $\pi_i$ by $\hat{\pi}_i$ (slide 20).
+    \item Compute distorted expectation:
+    \[
+        \hat{E}(C_t) = \sum_i \hat{\pi}_i C_{t,i}.
+    \]
+    \item Price using risk-free discounting:
+    \[
+        P_t^A = \frac{\hat{E}(C_t)}{(1+r_t)^t}.
+    \]
+    \item This is the basis of martingale pricing and risk-neutral valuation.
+\end{itemize}
+
+%============================================================
+\subsection{Two Perspectives on Asset Pricing}
+
+\paragraph{No-arbitrage perspective.}
+\begin{itemize}
+    \item Takes some prices as given and derives others (slide 21).
+    \item Examples in the slides:
+    \begin{itemize}
+        \item Coupon bond = portfolio of discount bonds.
+        \item Risky payoff = portfolio of contingent claims.
+    \end{itemize}
+    \item Requires only that arbitrage opportunities do not exist.
+\end{itemize}
+
+\paragraph{Equilibrium perspective.}
+\begin{itemize}
+    \item Uses microeconomic foundations: consumers maximize expected utility; markets clear (slide 21).
+    \item Determines all prices simultaneously.
+    \item Links asset prices to fundamentals such as marginal rates of substitution.
+\end{itemize}
+
+\paragraph{Unified view.}
+\begin{itemize}
+    \item Slide 24 summary:
+    \[
+        \begin{array}{lll}
+            \text{Model} & \text{Equilibrium} & \text{No-Arbitrage} \\
+            \hline
+            \text{Risk Premia} & \text{CAPM, CCAPM} & \text{APT} \\
+            \text{Contingent Claims} & \text{A--D} & \text{A--D} \\
+            \text{Distorted Probabilities} & \text{Martingale} &   
+        \end{array}
+    \]
+    \item All models aim to compute 
+    \[
+        P_0 = \frac{\text{risk-adjusted payoff}}{\text{risk-free discount factor}}.
+    \]
+\end{itemize}
+
+
+\end{document}
